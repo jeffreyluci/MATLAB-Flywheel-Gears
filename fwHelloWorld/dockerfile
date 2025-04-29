@@ -1,0 +1,31 @@
+ARG MAKE_JOBS="1"
+ARG DEBIAN_FRONTEND="noninteractive"
+
+FROM containers.mathworks.com/matlab-runtime:r2024b
+
+# Add environmental variables, for Matlab MCR the most important thing is to have 
+# the same version on the imported MCR and the LD_LIBRARY_PATH
+ENV MCRROOT=/opt/mcr
+ENV MCR_VERSION=R2024b
+ENV LD_LIBRARY_PATH=/opt/matlabruntime/R2024b/runtime/glnxa64:/opt/matlabruntime/R2024b/bin/glnxa64:/opt/matlabruntime/R2024b/sys/os/glnxa64
+ENV AGREE_TO_MATLAB_RUNTIME_LICENSE=yes
+
+# Flywheel specific and other activities
+ENV FLYWHEEL="/flywheel/v0"
+RUN mkdir -p ${FLYWHEEL}
+WORKDIR ${FLYWHEEL}
+
+# Installing the current project 
+COPY manifest.json $FLYWHEEL/
+COPY compiled/fwhelloworld $FLYWHEEL/fwhelloworld
+
+# Copy gear specific files
+COPY compiled/fwhelloworld /usr/local/bin/fwhelloworld
+RUN chmod +x /usr/local/bin/fwhelloworld
+
+# Configure entrypoint
+#Since we're using the Mathworks pre-built docker image, the enviroment
+#configs performed in the typical bash shell script are not necessary, and
+#we can just use the compiled app as the entrypoint.
+RUN chmod a+x $FLYWHEEL/fwhelloworld
+ENTRYPOINT ["/flywheel/v0/fwhelloworld"]

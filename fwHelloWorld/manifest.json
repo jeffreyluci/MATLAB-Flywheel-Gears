@@ -1,0 +1,110 @@
+{
+  "name": "fwhelloworld",
+  "label": "fwhelloworld: gear environment testing gear",
+  "description": "Hello World type gear to parse inputs and save them for later analysis",
+  "maintainer": "Jeffrey Luci <jeffrey.luci@rutgers.edu>",
+  "author": "Jeffrey Luci <jeffrey.luci@rutgers.edu>",
+  "command": "fwhelloworld",
+  "cite": "",
+  "url": "",
+  "source": "https://github.com/jeffreyluci/MATLAB-Flywheel_Gears/tree/main/fwHelloWorld",
+  "license": "MIT",
+  "flywheel": "0",
+  "version": "20250429b",
+  "custom": {
+    "gear-builder": {
+      "image": "flywheel/fwhelloworld:20250429b",
+      "category": "analysis"
+    },
+    "flywheel": {
+      "classification": {
+        "function": [
+          "Image Processing - Other"
+        ],
+        "modality": [
+          "MR"
+        ],
+        "organ": [
+          "Brain"
+        ],
+        "species": [
+          "Human"
+        ],
+        "therapeutic_area": [
+          "Neurology",
+          "Psychiatry/Psychology"
+        ]
+      },
+      "show-job": true,
+      "suite": "Image Processing"
+    }
+  },
+  "inputs": {
+    "NIfTI_file": {
+      "description": "NIfTI",
+      "base": "file",
+      "optional": false,
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    }
+  },
+  "config": {
+    "pullDownList": {
+      "description": "BOLD = fMRI or diffusion MRI",
+      "default": "BOLD",
+      "type": "string",
+      "enum": [
+        "BOLD",
+        "diffusion"
+      ]
+    },
+    "doubleNumber": {
+      "description": "This number should be a double",
+      "type": "number",
+      "optional": false
+    },
+    "integerNumber": {
+      "description": "This number should be a double",
+      "type": "integer",
+      "optional": false
+    },
+    "arrayField": {
+      "description": "An array",
+      "optional": false,
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minItems": 3,
+        "maxItems": 3,
+        "default": [
+          3,
+          3,
+          1
+        ]
+      }
+    },
+    "boolInput": {
+      "description": "Bool value",
+      "default": true,
+      "type": "boolean"
+    }
+  },
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG": "C.UTF-8",
+    "FLYWHEEL": "/flywheel/v0",
+    "TEMPLATES": "/templates",
+    "XAPPLRESDIR": "/opt/mcr/R2024b/X11/app-defaults",
+    "MRTRIX_TMPFILE_DIR": "/flywheel/v0/output/tmp",
+    "PWD": "/flywheel/v0",
+    "DEBIAN_FRONTEND": "noninteractive",
+    "TZ": "Etc/UTC",
+    "LD_LIBRARY_PATH": "/opt/matlabruntime/R2024b/runtime/glnxa64:/opt/matlabruntime/R2024b/bin/glnxa64:/opt/matlabruntime/R2024b/sys/os/glnxa64",
+    "MCRROOT": "/opt/mcr",
+    "MCR_VERSION": "R2024b",
+    "AGREE_TO_MATLAB_RUNTIME_LICENSE": "yes"
+  }
+}
