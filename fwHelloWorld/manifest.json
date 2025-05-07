@@ -10,10 +10,10 @@
   "source": "https://github.com/jeffreyluci/MATLAB-Flywheel_Gears/tree/main/fwHelloWorld",
   "license": "MIT",
   "flywheel": "0",
-  "version": "20250429b",
+  "version": "20250507a",
   "custom": {
     "gear-builder": {
-      "image": "flywheel/fwhelloworld:20250429b",
+      "image": "flywheel/fwhelloworld:20250507a",
       "category": "analysis"
     },
     "flywheel": {
@@ -67,23 +67,28 @@
       "optional": false
     },
     "integerNumber": {
-      "description": "This number should be a double",
+      "description": "This number should be an integer",
+      "type": "integer",
+      "optional": false
+    },
+    "unsignedIntegerNumber": {
+      "description": "This number should be an unsigned integer",
+      "minimum": 0,
       "type": "integer",
       "optional": false
     },
     "arrayField": {
       "description": "An array",
-      "optional": false,
       "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "default": [
+        3,
+        3,
+        1
+      ],
       "items": {
-        "type": "integer",
-        "minItems": 3,
-        "maxItems": 3,
-        "default": [
-          3,
-          3,
-          1
-        ]
+        "type": "integer"
       }
     },
     "boolInput": {
